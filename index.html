@@ -13,7 +13,7 @@
     <main class="auth-container">
         <div class="auth-card">
             <!-- Login Form -->
-            <form class="auth-form active" id="login-form" novalidate>
+            <form class="auth-form active" id="login-form" method="post" action="">
                 <h1>Login</h1>
                 <p class="auth-subtitle">Welcome back! Please sign in.</p>
 
@@ -21,24 +21,15 @@
                     <label for="login-email">Email</label>
                     <input id="login-email" name="email" type="email" placeholder="Enter your email"
                         autocomplete="email" required>
-                    <span class="field-error" id="login-email-error"></span>
                 </div>
 
                 <div class="field-group">
                     <label for="login-password">Password</label>
-                    <div class="password-field">
-                        <input id="login-password" name="password" type="password" placeholder="Enter your password"
-                            autocomplete="current-password" required>
-                        <button type="button" class="toggle-password" aria-label="Show password"
-                            data-target="login-password"></button>
-                    </div>
-                    <span class="field-error" id="login-password-error"></span>
+                    <input id="login-password" name="password" type="password" placeholder="Enter your password"
+                        autocomplete="current-password" required>
                 </div>
 
-                <button type="submit" class="btn-primary">
-                    <span class="btn-text">Login</span>
-                    <span class="btn-loader" hidden></span>
-                </button>
+                <button type="submit" class="btn-primary">Login</button>
 
                 <p class="auth-switch">
                     Don't have an account?
@@ -47,44 +38,32 @@
             </form>
 
             <!-- Register Form -->
-            <form class="auth-form" id="register-form" novalidate hidden>
+            <form class="auth-form" id="register-form" method="post" action="" hidden>
                 <h1>Register</h1>
                 <p class="auth-subtitle">Create your account to get started.</p>
 
                 <div class="field-group">
                     <label for="register-name">Name</label>
                     <input id="register-name" name="name" type="text" placeholder="Enter your name"
-                        autocomplete="name" required minlength="2">
-                    <span class="field-error" id="register-name-error"></span>
+                        autocomplete="name" required>
                 </div>
 
                 <div class="field-group">
                     <label for="register-email">Email</label>
                     <input id="register-email" name="email" type="email" placeholder="Enter your email"
                         autocomplete="email" required>
-                    <span class="field-error" id="register-email-error"></span>
                 </div>
 
                 <div class="field-group">
                     <label for="register-password">Password</label>
-                    <div class="password-field">
-                        <input id="register-password" name="password" type="password"
-                            placeholder="Create a password" autocomplete="new-password" required minlength="6">
-                        <button type="button" class="toggle-password" aria-label="Show password"
-                            data-target="register-password"></button>
-                    </div>
-                    <span class="field-error" id="register-password-error"></span>
+                    <input id="register-password" name="password" type="password" placeholder="Create a password"
+                        autocomplete="new-password" required>
                 </div>
 
                 <div class="field-group">
                     <label for="register-confirm">Confirm Password</label>
-                    <div class="password-field">
-                        <input id="register-confirm" name="confirmPassword" type="password"
-                            placeholder="Confirm your password" autocomplete="new-password" required>
-                        <button type="button" class="toggle-password" aria-label="Show password"
-                            data-target="register-confirm"></button>
-                    </div>
-                    <span class="field-error" id="register-confirm-error"></span>
+                    <input id="register-confirm" name="confirm_password" type="password"
+                        placeholder="Confirm your password" autocomplete="new-password" required>
                 </div>
 
                 <div class="field-group">
@@ -94,13 +73,9 @@
                         <option value="user">User</option>
                         <option value="admin">Admin</option>
                     </select>
-                    <span class="field-error" id="register-role-error"></span>
                 </div>
 
-                <button type="submit" class="btn-primary">
-                    <span class="btn-text">Register</span>
-                    <span class="btn-loader" hidden></span>
-                </button>
+                <button type="submit" class="btn-primary">Register</button>
 
                 <p class="auth-switch">
                     Already have an account?
