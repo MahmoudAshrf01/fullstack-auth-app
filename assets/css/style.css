@@ -79,6 +79,16 @@ body {
     margin-bottom: 28px;
 }
 
+.auth-alert {
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    background: #fff5f5;
+    color: var(--error);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
 .field-group {
     margin-bottom: 18px;
 }
@@ -276,6 +286,44 @@ body {
 .link-btn:hover {
     color: var(--primary-hover);
     text-decoration: underline;
+}
+
+.logout-form {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.btn-logout {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 2px solid var(--input-border);
+    border-radius: 8px;
+    background: var(--input-bg);
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.logout-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.btn-logout:hover {
+    color: var(--error);
+    border-color: rgba(229, 62, 62, 0.35);
+    background: #fff5f5;
+    box-shadow: 0 2px 8px rgba(229, 62, 62, 0.12);
+}
+
+.btn-logout:active {
+    transform: translateY(1px);
 }
 
 @media (max-width: 440px) {

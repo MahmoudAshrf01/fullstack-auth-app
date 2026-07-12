@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+$loginError = $_SESSION['login_error'] ?? null;
+$registerError = $_SESSION['register_error'] ?? null;
+$activeForm = $_SESSION['active_form'] ?? 'login-form';
+
+unset($_SESSION['login_error'], $_SESSION['register_error'], $_SESSION['active_form']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auth App</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -13,9 +22,13 @@
     <main class="auth-container">
         <div class="auth-card">
             <!-- Login Form -->
-            <form class="auth-form active" id="login-form" method="post" action="">
+            <form class="auth-form<?= $activeForm === 'login-form' ? ' active' : '' ?>" id="login-form" method="post" action="auth/login_register.php"<?= $activeForm !== 'login-form' ? ' hidden' : '' ?>>
                 <h1>Login</h1>
                 <p class="auth-subtitle">Welcome back! Please sign in.</p>
+
+                <?php if ($loginError): ?>
+                    <p class="auth-alert"><?= htmlspecialchars($loginError) ?></p>
+                <?php endif; ?>
 
                 <div class="field-group">
                     <label for="login-email">Email</label>
@@ -29,7 +42,7 @@
                         autocomplete="current-password" required>
                 </div>
 
-                <button type="submit" class="btn-primary">Login</button>
+                <button type="submit" name="login" class="btn-primary">Login</button>
 
                 <p class="auth-switch">
                     Don't have an account?
@@ -38,9 +51,13 @@
             </form>
 
             <!-- Register Form -->
-            <form class="auth-form" id="register-form" method="post" action="" hidden>
+            <form class="auth-form<?= $activeForm === 'register-form' ? ' active' : '' ?>" id="register-form" method="post" action="auth/login_register.php"<?= $activeForm !== 'register-form' ? ' hidden' : '' ?>>
                 <h1>Register</h1>
                 <p class="auth-subtitle">Create your account to get started.</p>
+
+                <?php if ($registerError): ?>
+                    <p class="auth-alert"><?= htmlspecialchars($registerError) ?></p>
+                <?php endif; ?>
 
                 <div class="field-group">
                     <label for="register-name">Name</label>
@@ -61,12 +78,6 @@
                 </div>
 
                 <div class="field-group">
-                    <label for="register-confirm">Confirm Password</label>
-                    <input id="register-confirm" name="confirm_password" type="password"
-                        placeholder="Confirm your password" autocomplete="new-password" required>
-                </div>
-
-                <div class="field-group">
                     <label for="register-role">Role</label>
                     <select id="register-role" name="role" required>
                         <option value="" disabled selected>--Select Role--</option>
@@ -75,7 +86,7 @@
                     </select>
                 </div>
 
-                <button type="submit" class="btn-primary">Register</button>
+                <button type="submit" name="register" class="btn-primary">Register</button>
 
                 <p class="auth-switch">
                     Already have an account?
@@ -85,7 +96,7 @@
         </div>
     </main>
 
-    <script src="app.js"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 
 </html>
