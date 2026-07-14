@@ -5,6 +5,9 @@ start_secure_session();
 $loginError = $_SESSION['login_error'] ?? null;
 $registerError = $_SESSION['register_error'] ?? null;
 $activeForm = $_SESSION['active_form'] ?? 'login-form';
+if (!in_array($activeForm, ['login-form', 'register-form'], true)) {
+    $activeForm = 'login-form';
+}
 
 unset($_SESSION['login_error'], $_SESSION['register_error'], $_SESSION['active_form']);
 ?>
@@ -29,7 +32,7 @@ unset($_SESSION['login_error'], $_SESSION['register_error'], $_SESSION['active_f
                 <p class="auth-subtitle">Welcome back! Please sign in.</p>
 
                 <?php if ($loginError): ?>
-                    <p class="auth-alert"><?= htmlspecialchars($loginError) ?></p>
+                    <p class="auth-alert"><?= e($loginError) ?></p>
                 <?php endif; ?>
 
                 <div class="field-group">
@@ -59,7 +62,7 @@ unset($_SESSION['login_error'], $_SESSION['register_error'], $_SESSION['active_f
                 <p class="auth-subtitle">Create your account to get started.</p>
 
                 <?php if ($registerError): ?>
-                    <p class="auth-alert"><?= htmlspecialchars($registerError) ?></p>
+                    <p class="auth-alert"><?= e($registerError) ?></p>
                 <?php endif; ?>
 
                 <div class="field-group">

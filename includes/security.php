@@ -20,6 +20,11 @@ function start_secure_session(): void
     session_start();
 }
 
+function e(string $value): string
+{
+    return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+
 function csrf_token(): string
 {
     if (empty($_SESSION['csrf_token'])) {
@@ -31,7 +36,7 @@ function csrf_token(): string
 
 function csrf_field(): string
 {
-    return '<input type="hidden" name="csrf_token" value="' . htmlspecialchars(csrf_token()) . '">';
+    return '<input type="hidden" name="csrf_token" value="' . e(csrf_token()) . '">';
 }
 
 function verify_csrf_token(): bool

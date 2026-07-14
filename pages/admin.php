@@ -16,7 +16,7 @@ require_role('admin');
             <div class="auth-form active">
                 <?php require_once __DIR__ . '/../includes/logout_button.php'; ?>
                 <h1>Admin Dashboard</h1>
-                <p class="auth-subtitle">Welcome, <?= htmlspecialchars($_SESSION['name']) ?>!</p>
+                <p class="auth-subtitle">Welcome, <?= e($_SESSION['name']) ?>!</p>
             </div>
         </div>
     </main>
