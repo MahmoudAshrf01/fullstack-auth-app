@@ -1,8 +1,9 @@
 <?php
 
-session_start();
+require_once __DIR__ . '/../includes/security.php';
+start_secure_session();
 
-if (!isset($_POST['logout'])) {
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['logout']) || !verify_csrf_token()) {
     header('Location: ../index.php');
     exit();
 }

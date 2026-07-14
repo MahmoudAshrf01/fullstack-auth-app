@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . '/includes/security.php';
+start_secure_session();
 
 $loginError = $_SESSION['login_error'] ?? null;
 $registerError = $_SESSION['register_error'] ?? null;
@@ -23,6 +24,7 @@ unset($_SESSION['login_error'], $_SESSION['register_error'], $_SESSION['active_f
         <div class="auth-card">
             <!-- Login Form -->
             <form class="auth-form<?= $activeForm === 'login-form' ? ' active' : '' ?>" id="login-form" method="post" action="auth/login_register.php"<?= $activeForm !== 'login-form' ? ' hidden' : '' ?>>
+                <?= csrf_field() ?>
                 <h1>Login</h1>
                 <p class="auth-subtitle">Welcome back! Please sign in.</p>
 
@@ -52,6 +54,7 @@ unset($_SESSION['login_error'], $_SESSION['register_error'], $_SESSION['active_f
 
             <!-- Register Form -->
             <form class="auth-form<?= $activeForm === 'register-form' ? ' active' : '' ?>" id="register-form" method="post" action="auth/login_register.php"<?= $activeForm !== 'register-form' ? ' hidden' : '' ?>>
+                <?= csrf_field() ?>
                 <h1>Register</h1>
                 <p class="auth-subtitle">Create your account to get started.</p>
 
@@ -62,7 +65,7 @@ unset($_SESSION['login_error'], $_SESSION['register_error'], $_SESSION['active_f
                 <div class="field-group">
                     <label for="register-name">Name</label>
                     <input id="register-name" name="name" type="text" placeholder="Enter your name"
-                        autocomplete="name" required>
+                        autocomplete="name" maxlength="100" required>
                 </div>
 
                 <div class="field-group">
@@ -73,17 +76,8 @@ unset($_SESSION['login_error'], $_SESSION['register_error'], $_SESSION['active_f
 
                 <div class="field-group">
                     <label for="register-password">Password</label>
-                    <input id="register-password" name="password" type="password" placeholder="Create a password"
-                        autocomplete="new-password" required>
-                </div>
-
-                <div class="field-group">
-                    <label for="register-role">Role</label>
-                    <select id="register-role" name="role" required>
-                        <option value="" disabled selected>--Select Role--</option>
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                    </select>
+                    <input id="register-password" name="password" type="password" placeholder="At least 8 characters"
+                        autocomplete="new-password" minlength="8" maxlength="128" required>
                 </div>
 
                 <button type="submit" name="register" class="btn-primary">Register</button>
